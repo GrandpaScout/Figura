@@ -176,6 +176,9 @@ public class BlockbenchModelParser {
                     FiguraMod.LOGGER.error("", e);
 
                 //otherwise, load from the source stored in the model
+                if (texture.source == null)
+                    throw new Exception("Model \"" + modelName + "\" does not have a matching file or embedded source for texture \"" + name + "\"");
+
                 source = Base64.getDecoder().decode(texture.source.substring("data:image/png;base64,".length()));
                 path = folders + modelName + "." + name;
                 FiguraMod.debug("Loaded {} Texture \"{}\" from {}", textureType.toUpperCase(Locale.US), name, path);
